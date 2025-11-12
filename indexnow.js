@@ -6,33 +6,27 @@ console.log("✅ IndexNow Blogger chargé !");
   const KEY = "258e84be5f074805b04fc3e376349631";      // 🔧 ta clé IndexNow Bing
   const ENDPOINT = "https://api.indexnow.org/indexnow"; // Serveur IndexNow officiel
 
-  // Fonction : envoyer l’URL actuelle à IndexNow
-  async function envoyerIndexNow(url) {
-    try {
-      const res = await fetch(ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          host: HOST,
-          key: KEY,
-          urlList: [url]
-        })
-      });
-      console.log("📢 IndexNow envoyé :", await res.text());
-    } catch (e) {
-      console.warn("🚫 Erreur IndexNow :", e.message);
-    }
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("🔄 Vérification de l’article...");
+  const url = window.location.href;
+  if (url.includes("/p/")) return; // Ne pas indexer les pages statiques
+  notifyIndexNow(url);
+});
 
-  // === LOGIQUE ===
-  const urlActuelle = window.location.href;
-  if (urlActuelle.includes("/20")) { // les articles Blogger contiennent /20xx/
-    const cleCache = "indexnow_" + urlActuelle;
-    if (!localStorage.getItem(cleCache)) {
-      localStorage.setItem(cleCache, Date.now());
-      envoyerIndexNow(urlActuelle);
-    } else {
-      console.log("⏩ Déjà envoyé :", urlActuelle);
-    }
+async function notifyIndexNow(url) {
+  try {
+    console.log("🚀 Envoi à IndexNow :", url);
+    const response = await fetch(ENDPOINT, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        host: HOST,
+        key: KEY,
+        urlList: [url]
+      })
+    });
+    console.log("📦 Réponse :", await response.text());
+  } catch (e) {
+    console.error("⚠️ Erreur IndexNow :", e.message);
   }
-})();
+}
