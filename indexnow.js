@@ -1,3 +1,4 @@
+console.log("✅ IndexNow Blogger chargé !");
 // 🚀 Auto IndexNow pour Blogger - Version stable 2025
 (function() {
   // === CONFIGURATION ===
