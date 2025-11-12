@@ -1,8 +1,8 @@
 // 🚀 Auto IndexNow pour Blogger - Version stable 2025
 (function() {
   // === CONFIGURATION ===
-  const HOST = "tonblog.blogspot.com"; // 🔧 ton domaine Blogger
-  const KEY = "ta_clef_IndexNow";      // 🔧 ta clé IndexNow Bing
+  const HOST = "martouba.blogspot.com"; // 🔧 ton domaine Blogger
+  const KEY = "258e84be5f074805b04fc3e376349631";      // 🔧 ta clé IndexNow Bing
   const ENDPOINT = "https://api.indexnow.org/indexnow"; // Serveur IndexNow officiel
 
   // Fonction : envoyer l’URL actuelle à IndexNow
