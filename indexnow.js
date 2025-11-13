@@ -2,7 +2,7 @@ console.log("✅ Script IndexNow Blogger chargé !");
 
 const HOST = "martouba.blogspot.com"; // 🔁 Remplace par ton nom de domaine complet sans https://
 const KEY = "258e84be5f074805b04fc3e376349631"; // 🔑 Clé IndexNow
-const ENDPOINT = "https://api.indexnow.org/indexnow";
+const ENDPOINT = "https://indexnow-proxy.marrtouba-tn.workers.dev/";
 
 // Cette fonction notifie IndexNow de la nouvelle URL
 async function notifyIndexNow(url) {
