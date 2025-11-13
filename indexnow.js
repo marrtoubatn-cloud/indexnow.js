@@ -1,32 +1,41 @@
-console.log("✅ IndexNow Blogger chargé !");
-// 🚀 Auto IndexNow pour Blogger - Version stable 2025
-(function() {
-  // === CONFIGURATION ===
-  const HOST = "martouba.blogspot.com"; // 🔧 ton domaine Blogger
-  const KEY = "258e84be5f074805b04fc3e376349631";      // 🔧 ta clé IndexNow Bing
-  const ENDPOINT = "https://api.indexnow.org/indexnow"; // Serveur IndexNow officiel
+console.log("✅ Script IndexNow Blogger chargé !");
 
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("🔄 Vérification de l’article...");
-  const url = window.location.href;
-  if (url.includes("/p/")) return; // Ne pas indexer les pages statiques
-  notifyIndexNow(url);
-});
+const HOST = "martouba.blogspot.com"; // 🔁 Remplace par ton nom de domaine complet sans https://
+const KEY = "258e84be5f074805b04fc3e376349631"; // 🔑 Clé IndexNow
+const ENDPOINT = "https://api.indexnow.org/indexnow";
 
+// Cette fonction notifie IndexNow de la nouvelle URL
 async function notifyIndexNow(url) {
   try {
-    console.log("🚀 Envoi à IndexNow :", url);
+    console.log("🚀 Envoi de l'URL à IndexNow :", url);
     const response = await fetch(ENDPOINT, {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         host: HOST,
         key: KEY,
         urlList: [url]
       })
     });
-    console.log("📦 Réponse :", await response.text());
+    console.log("📦 Réponse IndexNow :", await response.text());
   } catch (e) {
     console.error("⚠️ Erreur IndexNow :", e.message);
   }
 }
+
+// Détection automatique des pages Blogger
+document.addEventListener("DOMContentLoaded", () => {
+  const url = window.location.href;
+
+  // Exclut les pages statiques
+  if (url.includes("/p/")) {
+    console.log("⏩ Page statique ignorée :", url);
+    return;
+  }
+
+  // Envoie automatique pour les articles
+  if (url.includes(".blogspot.com/") || url.includes("/20")) {
+    notifyIndexNow(url);
+  }
+});
+
